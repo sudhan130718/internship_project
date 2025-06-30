@@ -79,9 +79,13 @@
           </a>
           <p class="mrp">MRP: <span class="strike">₹{{ product.mrp }}</span></p>
           <p class="price">Now: ₹{{ product.selling_price }}</p>
-          <a href="{% url 'add_to_cart' product.id %}?source=other">
-            <button class="add-to-basket">Add to Basket</button>
-          </a>
+           {% if product.total_stock == 0 %}
+          <a href=""><button id="out-of-stock" class="add-to-basket" disabled>Out of stock</button></a>
+
+{% else %}
+              <a href="{% url 'add_to_cart' product.id %}"><button class="add-to-basket" >Add to Basket</button></a>
+
+{% endif %}
           
         </div>
       {% empty %}
