@@ -1,0 +1,48 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'core/css/blog.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="blog-section">
+  <h2 class="heading">Blog</h2>
+  <p class="blog-intro">Stay updated with insights, tips, and news from the world of wholesale toy supply and rural retail support.</p>
+
+  <div class="blog-list">
+
+    <div class="blog-card">
+              <img  src="{% static 'core/images/images.jpeg' %}" alt="blog" class="blog-img">
+
+      <h3 class="blog-title">Why Toys Are Essential for Rural Childhood Development</h3>
+      <p class="blog-snippet">
+        Toys are more than just playthings—they help in cognitive, emotional, and social growth. In rural areas, access to educational and safe toys can transform learning at home and school...
+      </p>
+      <a href="#" class="read-more">Read More</a>
+    </div>
+
+    <div class="blog-card">
+              <img  src="{% static 'core/images/2.webp' %}" alt="blog" class="blog-img">
+
+      <h3 class="blog-title">Top 10 Affordable Toys That Rural Shops Love</h3>
+      <p class="blog-snippet">
+        Discover our best-selling toys that bring smiles to kids in villages. These toys are affordable, safe, and high in demand among local retailers and parents alike...
+      </p>
+      <a href="#" class="read-more">Read More</a>
+    </div>
+
+    <div class="blog-card">
+              <img  src="{% static 'core/images/1.webp' %}" alt="blog" class="blog-img">
+
+      <h3 class="blog-title">How We Ensure Reliable Delivery to Remote Locations</h3>
+      <p class="blog-snippet">
+        Learn how our team overcomes logistics challenges to bring wholesale toys even to the most remote panchayats. From tie-ups with rural courier services to flexible delivery points...
+      </p>
+      <a href="#" class="read-more">Read More</a>
+    </div>
+
+  </div>
+</section>
+
+{% endblock %}

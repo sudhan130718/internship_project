@@ -1,0 +1,54 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Wholesale Toy Supply</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Rubik font -->
+  <link href="https://fonts.googleapis.com/css2?family=Rubik&display=swap" rel="stylesheet">
+
+  <!-- Main CSS -->
+  <link rel="stylesheet" href="{% static 'core/css/style.css' %}">
+
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  {% block extra_css %}{% endblock %}
+</head>
+<body>
+  <div class="container">
+    {% include 'core/header.html' %}
+    
+    <main>
+      {% block content %}
+      {% endblock %}
+    </main>
+
+    {% include 'core/footer.html' %}
+  </div>
+
+  <!-- Scripts -->
+  <script src="{% static 'js/category_toggle.js' %}"></script>
+  <script src="{% static 'js/slider.js' %}"></script>
+  <script src="{% static 'js/price.js' %}"></script>
+  <script src="{% static 'js/quantity_change.js' %}"></script>
+  <script>
+  document.querySelectorAll('.faq-question').forEach(q => {
+    q.addEventListener('click', () => {
+      const answer = q.nextElementSibling;
+      answer.style.display = answer.style.display === 'block' ? 'none' : 'block';
+    });
+  });
+
+  // Initially hide all answers
+  window.addEventListener('load', () => {
+    document.querySelectorAll('.faq-answer').forEach(a => {
+      a.style.display = 'none';
+    });
+  });
+</script>
+</body>
+</html>

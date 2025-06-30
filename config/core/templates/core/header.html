@@ -1,0 +1,87 @@
+{% load static %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'core/css/header.css' %}">
+{% endblock %}
+
+{% block content %}
+<header class="header">
+
+  <!-- Top Notice & Links -->
+  <nav class="top-nav-bar">
+    <a href="{% url 'product_list' %}" class="bulk-link">BUYING IN BULK?... click here</a>
+    <div class="top-nav-links">
+      <a href="{% url 'delivery_info' %}">Delivery Information</a>
+      <a href="{% url 'order_history' %}">Track my orders</a>
+      <a href="{% url 'faqs' %}">FAQs</a>
+    </div>
+  </nav>
+
+  <hr>
+
+  <!-- Logo, Search, Wholesale Button, Icons -->
+  <div class="top-bar">
+    <div>
+        <img class="logo" src="{% static 'core/images/3.webp' %}" alt="Logo" class="logo-img">
+                <img class="logo" src="{% static 'core/images/4.webp' %}" alt="Logo" class="logo-img">
+
+</div>
+    <img class="logo" src="{% static 'core/images/logo.png' %}" alt="Logo" class="logo-img">
+
+    <form method="GET" action="{% url 'product_list' %}">
+      <div class="search-container">
+        <input type="text" name="q" placeholder="Search for Toys..." class="search-box" value="{{ request.GET.q }}">
+        <i class="search-icon fas fa-search"></i>
+      </div>
+    </form>
+<a href="{% url 'wholesale_deals' %}" >
+    <button class="wholesale-btn">Wholesale Deals</button></a>
+
+    <div class="icons">
+    
+
+
+  <a href="{% url 'wishlist_view' %}" class="cart-icon-wrapper" style="position: relative; display: inline-block;">
+  <img class="icon-img" src="{% static 'core/images/product/wish.png' %}" title="Wishlist" alt="Wishlist" class="icon">
+
+  <span class="cart-badge">{{ wishlist_count }}</span>
+
+</a>
+
+    <a href="{% url 'cart_view' %}" class="cart-icon-wrapper" style="position: relative; display: inline-block;">
+  <img class="icon-img" src="{% static 'core/images/cart.svg' %}" title="Cart" alt="Cart" class="icon">
+
+  <span class="cart-badge">{{ cart_count }}</span>
+</a>
+     {% if user.is_authenticated and request.session.otp_verified %}
+      <!-- Logout -->
+      <form action="{% url 'logout' %}" method="post" class="logout-form">
+        {% csrf_token %}
+        <button onclick="return confirm('Are you sure you want to logout?')" type="submit" class="logout-btn" title="Hi, {{ user.username}}">
+          <img class="icon-img"  src="{% static 'core/images/login.svg' %}" alt="Logout" class="logout-icon">
+        </button>
+      </form>
+      {% else %}
+      <!-- Login -->
+      <a href="{% url 'login' %}">
+        <img src="{% static 'core/images/login.svg' %}" alt="Login" title="Login" class="icon">
+      </a>
+      {% endif %}
+     
+    </div>
+  </div>
+
+  <!-- Navigation Bar -->
+ <nav class="nav-bar">
+  <a href="{% url 'home' %}">Home</a>
+  <a href="{% url 'category_grid' %}">Categories</a>
+    <a href="{% url 'best_sellers' %}">Best Seller</a>
+
+  <a href="{% url 'blog' %}">Blog</a>
+
+  {% if user.is_authenticated and user.is_staff %}
+    <a href="/adminpanel/">Admin</a>  <!-- Use your custom admin panel URL -->
+  {% endif %}
+</nav>
+</header>
+{% endblock %}

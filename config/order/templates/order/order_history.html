@@ -1,0 +1,22 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/order_history.css' %}">
+{% endblock %}
+
+{% block content %}
+<h2 class="heading"> Order History</h2>
+
+{% for order in orders %}
+  <div class="order-card">
+    <p>Order ID: {{ order.id }}</p>
+    <p>Total: ₹{{ order.total_amount }}</p>
+    <p>Status: {{ order.status }}</p>
+
+    <a href="{% url 'track_order' order.id %}" class="btn">Track Order</a>
+  </div>
+{% endfor %}
+
+{% endblock %}
+

@@ -1,0 +1,42 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'users/css/auth.css' %}">
+
+<div class="auth-container">
+  <h2>Login</h2>
+
+  {% if error_message %}
+    <p class="error-message">{{ error_message }}</p>
+  {% endif %}
+
+  <form method="POST">
+    {% csrf_token %}
+
+    {% if not show_otp or user.is_staff %}
+      <!-- Step 1: Username & Password -->
+      {{ form.as_p }}
+      <button type="submit">Login</button>
+    {% else %}
+      <!-- Step 2: OTP Verification (only for non-admins) -->
+      <div class="form-group">
+        <label for="otp">Enter OTP:</label>
+        <input type="text" name="otp" id="otp" required placeholder="Enter 6-digit OTP">
+      </div>
+      <button type="submit">Verify OTP</button>
+    {% endif %}
+  </form>
+
+  <div class="auth-links">
+    {% if not show_otp or user.is_staff %}
+     <p><a href="{% url 'forgot_username' %}">Forgot Username?</a></p>
+    <p><a href="{% url 'password_reset' %}">Forgot Password?</a></p>
+      <p>Don't have an account? <a href="{% url 'signup' %}">Click here to sign up</a></p>
+    {% endif %}
+    <div class="back-home">
+      <a href="/">← Back to Home</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

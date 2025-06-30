@@ -1,0 +1,41 @@
+{% extends 'adminpanel/base.html' %}
+{% load static %}
+
+  
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'adminpanel/css/dashboard.css' %}">
+
+{% endblock %}
+{% block content %}
+<section class="cards">
+        <div class="card">
+          <h3>Total Orders</h3>
+          <p id="total-orders">--</p>
+        </div>
+        <div class="card">
+          <h3>Total Users</h3>
+          <p id="total-users">--</p>
+        </div>
+        <div class="card">
+          <h3>Total Products</h3>
+          <p id="total-products">--</p>
+        </div>
+
+        <div class="card">
+          <h3>Total Categories</h3>
+          <p id="total-categories">--</p>
+        </div>
+
+        <div class="card">
+          <h3>Total Brands</h3>
+          <p id="total-brands">--</p>
+        </div>
+      </section>
+
+      <section class="content">
+        <h2>Recent Orders</h2>
+        <div id="recent-orders">Loading...</div>
+      </section>
+    </main>
+  </div>
+{% endblock %}

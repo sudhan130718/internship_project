@@ -1,0 +1,75 @@
+{% extends 'adminpanel/base.html' %}
+{% load static %}
+
+  
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'adminpanel/css/users.css' %}">
+
+{% endblock %}
+
+{% block content %}
+<div class="user-admin">
+  <h2 class="heading-with-lines" style="display: none;">Add User</h2>
+
+  <!-- Add User Form -->
+
+
+
+<form id="addUserForm" enctype="multipart/form-data" style="display: none;">
+  <input type="hidden" id="userId" name="id">
+  <div class="form-group">
+  <label>Username:</label>
+    <input type="text" name="username" id="username" placeholder="Username" required>
+  </div>
+  <div class="form-group">
+  <label>Email:</label>
+<input type="email" name="email" id="email" placeholder="Email" required>  
+</div>
+<div class="form-group">
+  <label>First Name:</label>
+        <input type="text" id="first_name" name="first_name" placeholder="First Name">
+  </div>
+<div class="form-group">
+  <label>Last Name:</label>
+    <input type="text" name="last_name" id="last_name" placeholder="Last Name">
+  </div>
+<div class="form-group">
+  <label>Password:</label>
+    <input type="password" name="password" id="password" placeholder="Password">
+  </div>
+  <div class="form-group">
+  <label>Confirm Password:</label>
+    <input type="password" name="confirmpassword" id="confirmpassword" placeholder="confirmPassword">
+  </div>
+ 
+  <button type="submit" id="submitBtn">Add User</button>
+</form>
+
+
+
+
+
+<br>
+  <!-- User List Table -->
+    <h2 class="heading-with-lines"> User List</h2>
+    <br>
+   <div class="search-container">
+  <label for="searchUserInput">Search User Name</label>
+<input type="text" id="searchUserInput" placeholder="Search by name"></div> <br>
+  <table id="userTable">
+    <thead>
+      <tr>
+<th>ID</th><th>Username</th><th>Email</th><th>First</th><th>Last</th><th>Role</th><th>Actions</th>      </tr>
+    </thead>
+    <tbody id="userTableBody">
+      <!-- Fetched data will appear here -->
+    </tbody>
+  </table>
+
+  <div id="paginationControls">
+  <button id="prevBtn">⏮ Previous</button>
+  <span id="pageInfo"></span>
+  <button id="nextBtn">⏭ Next</button>
+</div>
+</div>
+{% endblock %}

@@ -1,0 +1,70 @@
+/* ========== Global Styles ========== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Rubik', sans-serif;
+  background-color: #131313;
+  color: #333;
+}
+
+.container {
+  width: 96%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #FFFFFF;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+}
+
+/* ========== Responsive Design ========== */
+
+/* Large Tablets / Small Desktops (width ≤ 992px) */
+@media (max-width: 992px) {
+  .container {
+    width: 98%;
+    padding: 16px;
+    max-width: 992px;
+  }
+
+  main {
+    padding: 10px 0;
+  }
+
+  /* Example: adjust font sizes, spacing if needed */
+  h1, h2, h3 {
+    font-size: 90%;
+  }
+}
+
+/* Mobiles (width ≤ 600px) */
+@media (max-width: 600px) {
+  .container {
+    width: 100%;
+    padding: 12px;
+    max-width: 100%;
+  }
+
+  main {
+    padding: 8px 0;
+  }
+
+  h1, h2, h3 {
+    font-size: 85%;
+  }
+
+  /* Example: make buttons or links full-width if needed */
+  .btn {
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
+
+  /* Example: stack header/footer items */
+  header, footer {
+    text-align: center;
+  }
+}

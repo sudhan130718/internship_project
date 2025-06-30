@@ -1,0 +1,147 @@
+.track-order-page {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+.status-tracker .tracker {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  padding: 0;
+  margin: 1.5rem 0;
+}
+.status-tracker .tracker li {
+  flex: 1;
+  text-align: center;
+  padding: 0.5rem;
+  border-bottom: 4px solid lightgray;
+  color: gray;
+}
+.status-tracker .tracker li.done {
+  color: #e61a52;;
+  border-color: #e61a52;;
+  font-weight: bold;
+}
+
+
+.status-tracker {
+  margin: 20px 0;
+  padding: 10px;
+}
+.heading {
+  text-align: center;
+  font-size: 2rem;
+  margin: 20px 0;
+  color: #E61A52;
+      background-color: #edd66d;
+    padding: 30px;
+}
+.tracker {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  padding: 0;
+  margin: 0;
+}
+
+.tracker li {
+  flex: 1;
+  text-align: center;
+  position: relative;
+  padding: 10px;
+  color: #999;
+  font-weight: bold;
+}
+
+.tracker li.done {
+  color:#e61a52;; /* Green for completed */
+}
+
+.tracker li i {
+  display: block;
+  font-size: 40px;
+  margin-bottom: 20px;
+}
+@media (max-width: 768px) {
+  .track-order-page {
+    padding: 1rem;
+    width: 95%;
+  }
+
+  h2 {
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+
+  .order-summary p,
+  .shipping-info p,
+  .ordered-items li {
+    font-size: 14px;
+  }
+
+  .shipping-info h3,
+  .ordered-items h3 {
+    font-size: 18px;
+    margin-top: 20px;
+  }
+
+  .status-tracker .tracker {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .tracker li {
+    width: 100%;
+    padding: 15px 10px;
+    border-bottom: none;
+    border-left: 5px solid lightgray;
+    text-align: left;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    background-color: #f5f5f5;
+  }
+
+  .tracker li.done {
+    border-left-color: #e61a52;
+    color: #e61a52;
+    background-color: #fff0f5;
+  }
+
+  .tracker li i {
+    display: inline-block;
+    font-size: 20px;
+    margin-right: 10px;
+    vertical-align: middle;
+  }
+
+  .btn {
+    display: block;
+    margin: 20px auto 0;
+    text-align: center;
+    padding: 10px 20px;
+    font-size: 15px;
+    border-radius: 25px;
+    background-color: #e61a52;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+  }
+}
+
+@media (max-width: 480px) {
+  .tracker li {
+    font-size: 13px;
+    padding: 12px 8px;
+  }
+
+  .tracker li i {
+    font-size: 18px;
+    margin-right: 8px;
+  }
+
+  .btn {
+    font-size: 14px;
+    padding: 8px 16px;
+  }
+}

@@ -1,0 +1,101 @@
+{% extends "core/base.html" %}
+{% load static %}
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'core/css/home.css' %}">
+
+{% endblock %}
+
+{% block content %}
+  {% include 'core/banner.html' %}
+  <!-- Additional home content -->
+{% include "products/category_section.html" %}
+
+
+<!-- new arrivals -->
+<div class="new-arrivals-section">
+  <div class="left-banner">
+  <img src="{% static 'images/new_arrivals_banner.jpeg' %}" alt="New Arrivals">
+  <div class="baner-text">
+    <h2>New Arrivals</h2>
+    <a href="{% url 'new_arrivals' %}" class="view-all-btn">View All</a>
+  </div>
+</div>
+
+
+  <!-- Right Side (Slider) -->
+  <div class="right-slider">
+  <div class="slider-container">
+    <button class="prev">&#10094;</button>
+    <div class="slider-track">
+      {% for product in new_arrivals %}
+        <div class="product-card">
+                <a href="{% url 'product_detail' product.id %}">
+
+          <img src="{{ product.image.url }}" alt="{{ product.name }}">
+          <p class="product-name">{{ product.name }}</p>
+          <p class="mrp">MRP: <span class="strike">₹{{ product.mrp }}</span></p>
+          <p class="price">Now: ₹{{ product.selling_price }}</p>
+          <a href="{% url 'add_to_cart' product.id %}"><button class="add-to-basket">Add to Basket</button></a>
+         </a>
+        </div>
+       
+      {% endfor %}
+    </div>
+    <button class="next">&#10095;</button>
+  </div>
+</div>
+
+</div>
+
+
+<!-- Best seller -->
+
+<div class="new-arrivals-section">
+  <div class="left-banner">
+  <img src="{% static 'images/dino.jpeg' %}" alt="Best seller">
+  <div class="baner-text">
+    <h2>Best Seller</h2>
+    <a href="{% url 'best_sellers' %}" class="view-all-btn">View All</a>
+  </div>
+</div> 
+
+
+  <!-- Right Side (Slider) -->
+  <div class="right-slider">
+  <div class="slider-container">
+    <button class="prev">&#10094;</button>
+    <div class="slider-track">
+      {% for product in products %}
+        <div class="product-card">
+          <a href="{% url 'product_detail' product.id %}">
+
+          <img src="{{ product.image.url }}" alt="{{ product.name }}">
+          <p class="product-name">{{ product.name }}</p>
+          <p class="mrp">MRP: <span class="strike">₹{{ product.mrp }}</span></p>
+          <p class="price">Now: ₹{{ product.selling_price }}</p>
+          <a href="{% url 'add_to_cart' product.id %}" > <button class="add-to-basket"> Add to Basket</button></a>
+        </a>
+        </div>
+      {% endfor %} 
+    </div>
+    <button class="next">&#10095;</button>
+  </div>
+</div>
+
+</div>
+
+ <div class="banner2" > 
+
+  <div class="banner2-text">
+    <h1>
+       That coolest toy store that has Fulffy & Sulshy toys in the city.
+    </h1>
+    <h2>Grab yours until it goes out of stock!</h2>
+    <p>100s of Products from Tamil Nadu</p>
+    <a href="#" class="view-more-btn">View More</a>
+  </div>
+</div>
+
+  
+   
+{% endblock %}

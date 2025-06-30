@@ -1,0 +1,109 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/checkout.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="checkout-container">
+  <h2>Checkout</h2>
+
+  <form method="post" action="{% url 'place_order' %}">
+    {% csrf_token %}
+    <div class="checkout-wrapper">
+      <!-- Left - Billing Info -->
+      <div class="checkout-left">
+        <h3>Billing Details</h3>
+     
+        <label>Full Name</label>
+        <input type="text" name="full_name" id="fullName" value="{{ request.user.first_name }}" required>
+
+        <label>Email</label>
+        <input type="email" name="email" id="email" value="{{ request.user.email }}" required>
+
+        <label>Phone</label>
+        <input type="text" name="phone" id="phone" value="{{ request.user.profile.phone_number }}" required>
+
+        <label>Address Line 1</label>
+        <input type="text" name="address1" id="address1" value="{{ request.user.profile.address1 }}" required>
+
+        <label>Address Line 2</label>
+        <input type="text" name="address2" id="address2" value="{{ request.user.profile.address2 }}">
+
+        <label>City</label>
+        <input type="text" name="city" id="city" value="{{ request.user.profile.city }}" required>
+
+        <label>State</label>
+        <input type="text" name="state" id="state" value="{{ request.user.profile.state }}" required>
+
+        <label>Pincode</label>
+        <input type="text" name="pincode" id="pincode" value="{{ request.user.profile.pincode }}" required>
+
+       
+
+        <label>Payment Method</label>
+        <select name="payment_method" id="paymentMethod" required>
+          <option value="COD">Cash on Delivery</option>
+          <option value="ONLINE">Online Payment</option>
+        </select>
+
+        <div id="onlineOptions" style="display:none; margin-top: 10px;">
+          <label>Select Payment Option:</label>
+          <select name="online_option" id="onlineOptionSelect">
+            <option value="ATM">ATM</option>
+            <option value="GPAY">Google Pay</option>
+            <option value="PAYTM">PayTM</option>
+            <option value="NETBANKING">Net Banking</option>
+          </select>
+
+          <div id="cardDetails" style="display:none; margin-top: 10px;">
+            <label>Card Number</label>
+            <input type="text" name="card_number" maxlength="16">
+
+            <label>Expiry</label>
+            <input type="text" name="card_expiry" placeholder="MM/YY">
+
+            <label>CVV</label>
+            <input type="text" name="card_cvv" maxlength="3">
+          </div>
+        </div>
+      </div>
+
+      <!-- Right - Order Summary -->
+      <div class="checkout-right">
+        <h3>Your Order</h3>
+        <div class="summary-box">
+          {% for item in cart_items %}
+            <p>{{ item.quantity }} × {{ item.product.name }} = ₹{{ item.total_price }}</p>
+          {% endfor %}
+          <hr>
+          <p><strong>Total Amount: ₹{{ cart_total }}</strong></p>
+        </div>
+        <button type="submit" class="place-order-btn">Place Order</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<!-- JavaScript -->
+<script>
+
+
+
+
+  const paymentMethod = document.getElementById("paymentMethod");
+  const onlineOptions = document.getElementById("onlineOptions");
+  const onlineSelect = document.getElementById("onlineOptionSelect");
+  const cardDetails = document.getElementById("cardDetails");
+
+  paymentMethod.addEventListener("change", function () {
+    onlineOptions.style.display = this.value === "ONLINE" ? "block" : "none";
+    cardDetails.style.display = "block";
+  });
+
+  onlineSelect.addEventListener("change", function () {
+    cardDetails.style.display = this.value === "ATM" ? "block" : "none";
+  });
+</script>
+{% endblock %}

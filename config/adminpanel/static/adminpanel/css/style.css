@@ -1,0 +1,90 @@
+body {
+  margin: 0;
+  font-family: 'Rubik', sans-serif;
+  display: flex;
+  height: 100vh;
+  color: #131313;
+}
+
+.sidebar {
+  width: 200px;
+  background-color:#E61A52;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  padding: 20px;
+}
+
+.logo {
+  color: #EED76D;
+  font-size: 24px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.sidebar nav ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar nav ul li {
+  margin-bottom: 15px;
+}
+
+.sidebar nav ul li a {
+  display: flex;
+  align-items: center;
+  color: #fff;
+  text-decoration: none;
+  padding: 10px;
+  border-radius: 8px;
+  transition: background 0.3s;
+}
+
+.sidebar nav ul li a img {
+  width: 20px;
+  margin-right: 30px;
+}
+
+.sidebar nav ul li a:hover {
+  background-color: #f93d6f;
+}
+
+.logout-form {
+  margin-top: auto;
+}
+
+.logout-form button {
+  width: 100%;
+  background: none;
+  border: none;
+  color: #fff;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-family: 'Rubik', sans-serif;
+  font-size: 16px;
+  border-radius: 8px;
+}
+
+.logout-form button img {
+  width: 20px;
+  margin-right: 3cap;
+}
+
+.logout-form button:hover {
+  background-color: #f93d6f;
+}
+
+.main-content {
+  margin-left: 240px;
+  padding: 30px;
+  width: calc(100% - 240px);
+  background: #fff;
+  overflow-y: auto;
+}

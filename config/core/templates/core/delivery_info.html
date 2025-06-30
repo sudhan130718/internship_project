@@ -1,0 +1,42 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'core/css/delivery_info.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="delivery-info-container">
+  <h2 class="heading">Delivery Information</h2>
+ 
+
+  <section class="info-section">
+    <h3>Delivery Timeline</h3>
+    <p>We process and dispatch all wholesale toy orders within <strong>2-3 business days</strong>. Delivery to rural areas may take <strong>5-7 business days</strong> depending on your location.</p>
+  </section>
+
+  <section class="info-section">
+    <h3>Shipping Policy</h3>
+    <ul>
+      <li>We offer delivery to most rural areas across Tamil Nadu and nearby states.</li>
+      <li>Orders above ₹5,000 are eligible for <strong>free delivery</strong>.</li>
+      <li>Orders below ₹5,000 incur a flat delivery fee of ₹150.</li>
+    </ul>
+  </section>
+
+  <section class="info-section">
+    <h3>Special Note for Rural Shops</h3>
+    <p>We understand the challenges of rural logistics. Our delivery partners are trained to ensure smooth doorstep delivery even in remote regions. If your area is hard to reach, we will contact you in advance to coordinate delivery.</p>
+  </section>
+
+  <section class="info-section">
+    <h3>Contact & Support</h3>
+    <p>Need help tracking your delivery or confirming your location?</p>
+    <ul>
+      <li>Call us: <strong>+91 98765 43210</strong></li>
+      <li>Email: <strong>support@ruraltoysupply.in</strong></li>
+      <li>Support hours: 9:00 AM – 6:00 PM (Mon–Sat)</li>
+    </ul>
+  </section>
+</div>
+{% endblock %}

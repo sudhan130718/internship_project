@@ -1,0 +1,73 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/cart.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="cart-container">
+  <h2 class="heading">Your Cart</h2>
+
+  {% if cart_items %}
+  <div class="cart-wrapper">
+    <!-- Left Side - Cart Items -->
+    <div class="cart-left">
+      {% for item in cart_items %}
+      <div class="cart-item">
+        <div class="item-image">
+          <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
+        </div>
+        <div class="item-info">
+          <h3 class="truncate">{{ item.product.name }}</h3>
+          <p>Price: ₹{{ item.price }}</p>
+           {% if item.is_wholesale %}
+      <span class="wholesale-tag">Wholesale</span>
+            <span class="wholesale-tag">Min.Qty :{{item.product.min_wholesale_quantity}} </span>
+
+    {% endif %}
+        </div>
+         
+        <div class="quantity-controls">
+            <form method="post" action="{% url 'update_cart' item.id %}">
+              {% csrf_token %}
+              <button type="submit" name="action" value="decrease">-</button>
+              <input type="text" value="{{ item.quantity }}" readonly>
+              <button type="submit" name="action" value="increase">+</button>
+           
+            </form>
+            
+          </div>
+         
+         
+         
+      
+        <div class="item-remove">
+           <p>Total: ₹{{ item.total_price }}</p>
+          <form method="post" action="{% url 'remove_from_cart' item.id %}">
+            {% csrf_token %}
+            <button class="remove-btn">Remove</button>
+          </form>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <!-- Right Side - Cart Summary -->
+    <div class="cart-summary">
+      <h3>Cart Summary</h3>
+      <div class="summary-items">
+        {% for item in cart_items %}
+        <p>{{ item.quantity }}&nbsp;  ×&nbsp; &nbsp;  {{ item.product.name }}&nbsp;  = &nbsp; &nbsp;  ₹{{ item.total_price }}</p>
+        {% endfor %}
+      </div>
+      <hr>
+      <p class="total-amount">Total Amount :&nbsp;   ₹{{ cart_total }}</p>
+      <a href="{% url 'checkout' %}" class="checkout-btn">Checkout</a>
+    </div>
+  </div>
+  {% else %}
+  <p>Your cart is empty.</p>
+  {% endif %}
+</div>
+{% endblock %}

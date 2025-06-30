@@ -1,0 +1,98 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'css/product_view.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="product-view-container">
+  <div class="product-image">
+    <img src="{{ product.image.url }}" alt="{{ product.name }}">
+  </div>
+
+  <div class="product-details">
+    <h2>{{ product.name }}</h2>
+    <hr>
+    <p class="mrp">MRP: <span class="strike">₹{{ product.mrp }}</span></p>
+    <p class="price">Now: ₹{{ product.selling_price }}</p>
+    <p class="description">{{ product.description }}</p>
+
+    <div class="quantity-section">
+      <label>Quantity:</label>
+      <div class="quantity-control">
+        <button type="button" onclick="updateQuantity(-1)">−</button>
+        <input type="number" id="quantity" name="quantity" value="1" min="1" readonly>
+        <button type="button" onclick="updateQuantity(1)">+</button>
+      </div>
+    </div>
+
+    <form method="post" action="{% url 'add_to_cart' product.id %}">
+      {% csrf_token %}
+      <input type="hidden" name="quantity" id="formQuantity" value="1">
+      <button type="submit" class="add-to-basket">Add to Basket</button>
+    </form>
+
+
+<h3 style="color:#e61950; text-align: center; margin-bottom: 20px;">Reviews</h3>
+<hr>
+<br>
+
+<div class="reviews-container">
+  {% for review in product.reviews.all %}
+    <div class="review-card">
+      <div class="review-header">
+        <strong>{{ review.user.username }}</strong>
+        <div class="review-rating">
+          {% for i in star_range %}
+            {% if i <= review.rating %}
+              <span class="star filled">★</span>
+            {% else %}
+              <span class="star">★</span>
+            {% endif %}
+          {% endfor %}
+          <span class="numeric-rating">({{ review.rating }}/5)</span>
+        </div>
+      </div>
+      <p class="review-text">{{ review.text }}</p>
+    </div>
+  {% empty %}
+    <p class="no-reviews">No reviews yet.</p>
+  {% endfor %}
+</div>
+
+<div class="review-form-container">
+  <h3 style="color:#e61950">Add Review for "{{ product.name }}"</h3>
+<form method="post" action="{% url 'add_review' product.id %}">
+
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+
+    <div class="star-rating">
+      <input type="radio" id="star5" name="rating" value="5"><label for="star5">★</label>
+      <input type="radio" id="star4" name="rating" value="4"><label for="star4">★</label>
+      <input type="radio" id="star3" name="rating" value="3"><label for="star3">★</label>
+      <input type="radio" id="star2" name="rating" value="2"><label for="star2">★</label>
+      <input type="radio" id="star1" name="rating" value="1"><label for="star1">★</label>
+    </div>
+    {% if form.rating.errors %}
+      <div style="color: red; text-align: center;">
+        {{ form.rating.errors }}
+      </div>
+    {% endif %}
+
+   <label style="color:#e61950" for="id_text">Your Review</label>
+
+    {{ form.text }}
+    {{ form.text.errors }}
+<textarea name="text" id="id_text" rows="4" placeholder="Write your review here..." required></textarea>
+
+    <button type="submit">Submit Review</button>
+  </form>
+</div>
+
+
+
+  </div>
+</div>
+{% endblock %}

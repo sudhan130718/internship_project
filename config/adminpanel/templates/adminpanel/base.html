@@ -1,0 +1,54 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <title>Admin Panel</title>
+  <meta name="csrf-token" content="{{ csrf_token }}">
+  <link rel="stylesheet" href="{% static 'adminpanel/css/style.css' %}">
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  {% block extra_css %}{% endblock %}
+</head>
+<body>
+  <aside class="sidebar">
+    <h1 class="logo">Admin</h1>
+    <nav>
+      <ul>
+                <li><a href="{% url 'home' %}"><img src="{% static 'adminpanel/images/icons/9.png' %}" alt="Dashboard"> Home</a></li>
+        <li><a href="{% url 'admin_dashboard' %}"><img src="{% static 'adminpanel/images/icons/1.png' %}" alt="Dashboard"> Dashboard</a></li>
+        <li><a href="{% url 'admin_users' %}"><img src="{% static 'adminpanel/images/icons/2.png' %}" alt="Users"> Users</a></li>
+        <li><a href="{% url 'admin_categories' %}"><img src="{% static 'adminpanel//images/icons/3.png' %}" alt="Categories"> Categories</a></li>
+        <li><a href="{% url 'admin_brands' %}"><img src="{% static 'adminpanel/images/icons/4.png' %}" alt="Brands"> Brands</a></li>
+        <li><a href="{% url 'admin_products' %}"><img src="{% static 'adminpanel/images/icons/5.png' %}" alt="Products"> Products</a></li>
+        <li><a href="{% url 'admin_orders' %}"><img src="{% static 'adminpanel/images/icons/6.png' %}" alt="Orders"> Orders</a></li>
+      </ul>
+    </nav>
+
+    <form method="post" action="{% url 'logout' %}" class="logout-form">
+      {% csrf_token %}
+      <button type="submit" onclick="return confirm('Are you sure to logout?')">
+        <img src="{% static 'adminpanel/images/icons/8.png' %}" alt="Logout"> Logout
+      </button>
+    </form>
+  </aside>
+
+  <main class="main-content">
+    {% block content %}{% endblock %}
+  </main>
+
+  <script src="{% static 'adminpanel/js/main.js' %}"></script>
+   <script src="{% static 'adminpanel/js/categories.js' %}"></script>
+   <script src="{% static 'adminpanel/js/brands.js' %}"></script>
+  <script src="{% static 'adminpanel/js/products.js' %}"></script>
+   <script src="{% static 'adminpanel/js/users.js' %}"></script>
+  <script src="{% static 'adminpanel/js/orders.js' %}"></script>
+    <script src="{% static 'adminpanel/js/dashboard.js' %}"></script>
+
+
+
+
+
+</body>
+</html>

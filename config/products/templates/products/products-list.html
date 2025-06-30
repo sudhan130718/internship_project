@@ -1,0 +1,97 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'css/new_arrival.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="new-arrivals-section">
+  <!-- Left Side - Products -->
+  
+  <div class="left-sider">
+     <h2 class="heading">Products</h2>
+    <div class="sider-container">
+      {% for product in products %}
+        <div class="product-card-new" >
+            <a href="{% url 'toggle_wishlist' product.id %}" class="wishlist-icon">
+    {% if product.id in wishlist_product_ids %}
+      <img src="https://cdn-icons-png.flaticon.com/512/833/833472.png" alt="Remove from Wishlist" title="Remove from Wishlist">
+    {% else %}
+      <img src="https://cdn-icons-png.flaticon.com/512/1077/1077035.png" alt="Add to Wishlist" title="Add to Wishlist">
+    {% endif %}
+  </a>
+  
+            <a href="{% url 'product_detail' product.id %}">
+        <img src="{{ product.image.url }}" alt="{{ product.name }}">
+        <p class="product-name">{{ product.name }}</p>
+      </a>
+      
+          <p class="mrp">MRP: <span class="strike">₹{{ product.mrp }}</span></p>
+          <p class="price">Now: ₹{{ product.selling_price }}</p>
+           
+      {% if product.total_stock == 0 %}
+          <a href=""><button id="out-of-stock" class="add-to-basket" disabled>Out of stock</button></a>
+
+{% else %}
+              <a href="{% url 'add_to_cart' product.id %}"><button class="add-to-basket" >Add to Basket</button></a>
+
+{% endif %}
+        </div>
+      {% empty %}
+        <p>No products found for selected filters.</p>
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- Right Side - Filters -->
+  <div class="right-sider">
+    <form id="filterForm" method="get">
+      <!-- Price Filter -->
+<div class="filter-section">
+  <h4>Price</h4>
+  <div class="price-slider-container">
+    <input style="top: 7px;"  type="range" id="priceMinSlider" name="price_min" min="0" max="10000" step="100" value="{{ price_min|default:'0' }}" onchange="this.form.submit()">
+   <hr style="height: 5px; width: 97%;
+  background-color: #e61950;">
+    <input style="top: -14px;"  type="range" id="priceMaxSlider" name="price_max" min="0" max="10000" step="100" value="{{ price_max|default:'10000' }}" onchange="this.form.submit()">
+  </div>
+  <div class="price-range">
+    <span>₹<output id="priceMinOutput">{{ price_min|default:'0' }}</output></span>
+    to
+    <span>₹<output id="priceMaxOutput">{{ price_max|default:'10000' }}</output></span>
+  </div>
+</div>
+      <!-- Brand Filter -->
+      <div class="filter-section">
+        <h4>Brands</h4>
+        <div class="checkbox-group">
+          {% for brand in brands %}
+            <label>
+              <input type="checkbox" name="brand" value="{{ brand.id }}"
+                {% if brand.id|stringformat:"s" in selected_brands %}checked{% endif %}
+                onchange="this.form.submit()">
+              {{ brand.name }}
+            </label>
+          {% endfor %}
+        </div>
+      </div>
+
+      <!-- Age Group Filter -->
+      <div class="filter-section">
+        <h4>Age Group</h4>
+        <div class="checkbox-group">
+          {% for key, value in age_choices %}
+            <label>
+              <input type="checkbox" name="age" value="{{ key }}"
+                {% if key in selected_ages %}checked{% endif %}
+                onchange="this.form.submit()">
+              {{ value }}
+            </label>
+          {% endfor %}
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

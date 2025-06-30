@@ -1,0 +1,53 @@
+/* FAQ Section Styles */
+.faq-section {
+  padding: 40px 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+  font-family: 'Rubik', sans-serif;
+}
+.heading {
+  text-align: center;
+  font-size: 2rem;
+  margin: 20px 0;
+  color: #E61A52;
+  background-color: #EDD66D;
+  padding: 30px;
+  border-radius: 10px;
+}
+
+.faq-item {
+  margin-bottom: 1.5rem;
+}
+
+.faq-question {
+  font-size: 18px;
+  color: #e61a52;
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+}
+
+.faq-answer {
+  font-size: 16px;
+  color: #555;
+  padding-left: 10px;
+  line-height: 1.5;
+}
+
+/* Optional toggle animation (JS optional for real toggle) */
+.faq-question:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .faq-section h2 {
+    font-size: 20px;
+  }
+
+  .faq-question {
+    font-size: 16px;
+  }
+
+  .faq-answer {
+    font-size: 14px;
+  }
+}

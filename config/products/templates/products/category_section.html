@@ -1,0 +1,41 @@
+{% load static %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'css/category_section.css' %}">
+{% endblock %}
+
+{% block content %}
+ 
+
+
+
+
+
+<h2 class="heading-with-lines"><span>Our Categories</span></h2>
+  <div class="grid">
+    {% for category in categories %}
+<a href="{% url 'products_by_category' category.slug %}">
+        <div class="category-box {% if forloop.counter > 4 %}hidden-category{% endif %}">
+        <div class="image-container">
+          {% if category.image %}
+            <img src="{{ category.image.url }}" alt="{{ category.name }}">
+          {% else %}
+            <img src="{% static 'images/default-category.png' %}" alt="No Image">
+          {% endif %}
+        </div>
+        <h3>{{ category.name }}</h3>
+      </div>
+    </a>
+      {% empty %}
+      <p>No categories found.</p>
+    {% endfor %}
+  </div>
+
+  {% if categories|length > 4 %}
+  <div class="center-btn">
+    <button id="toggleBtn">View More</button>
+  </div>
+{% endif %}
+ 
+
+{% endblock %}

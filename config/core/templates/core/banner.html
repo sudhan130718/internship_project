@@ -1,0 +1,28 @@
+
+{% load static %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'core/css/banner.css' %}">
+
+{% endblock %}
+
+{% block content %}
+<div class="banner">
+  <div class="banner-text">
+    <h1>
+        Wholesale Toys & Top Brands at One Stop
+    </h1>
+    <h2>Kids Love for Less!</h2>
+    <p>100s of Products from Tamil Nadu</p>
+    <a href="#" class="view-more-btn">View More</a>
+  </div>
+</div>
+
+<div class="wholesale-announcement">
+  <svg class="star-icon" xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 0 24 24" width="20" fill="#E61A52">
+    <path d="M12 17.27L18.18 21 16.54 13.97 22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+  </svg>
+  <span>NEW! NOW ORDER DIRECT FROM OUR WAREHOUSE AT WHOLESALE PRICES</span>
+</div>
+
+{% endblock %}

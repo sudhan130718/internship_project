@@ -1,0 +1,63 @@
+{% extends 'adminpanel/base.html' %}
+{% load static %}
+
+  
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'adminpanel/css/brands.css' %}">
+
+{% endblock %}
+
+{% block content %}
+<div class="brand-admin">
+  <h2 class="heading-with-lines">Add Brand</h2>
+
+  <!-- Add Brand Form -->
+
+
+
+<form id="addBrandForm" enctype="multipart/form-data">
+  <input type="hidden" id="brandId" name="id">
+  <div class="form-group">
+  <label>Name:</label>
+  <input type="text" name="name"  id="name" required>
+  </div>
+  <div class="form-group">
+  <label>description:</label>
+  <input type="text" name="description" id="description">
+  </div>
+  <div class="form-group">
+  <label>Logo:</label>
+  <input type="file" name="logo" id="logo" accept="image/*">
+  </div>
+  <button type="submit" id="submitBtn">Add Brand</button>
+</form>
+
+
+
+
+
+<br>
+  <!-- Category List Table -->
+    <h2 class="heading-with-lines"> Brand List</h2>
+    <br>
+   <div class="search-container">
+  <label for="searchInput">Search Brand Name</label>
+<input type="text" id="searchInput" placeholder="Search by name"></div> <br>
+  <table id="brandTable">
+    <thead>
+      <tr>
+       <th>Logo</th><th>Name</th><th>Description</th><th>Actions</th>
+      </tr>
+    </thead>
+    <tbody id="brandTableBody">
+      <!-- Fetched data will appear here -->
+    </tbody>
+  </table>
+
+  <div id="paginationControls">
+  <button id="prevBtn">⏮ Previous</button>
+  <span id="pageInfo"></span>
+  <button id="nextBtn">⏭ Next</button>
+</div>
+</div>
+{% endblock %}

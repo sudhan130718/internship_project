@@ -1,0 +1,183 @@
+{% extends 'adminpanel/base.html' %}
+{% load static %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'adminpanel/css/products.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="product-admin">
+  <h2 class="heading-with-lines">Add Product</h2>
+
+  <form id="addProductForm" enctype="multipart/form-data">
+    <input type="hidden" id="productId" name="id">
+
+    <!-- Category and Brand -->
+    <div class="form-group">
+      <label for="category">Category:</label>
+      <select name="category" id="category" required>
+        <option value="" disabled selected>--Select Category--</option>
+        {% for cat in categories %}
+          <option value="{{ cat.id }}">{{ cat.name }}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="brand">Brand:</label>
+      <select name="brand" id="brand" required>
+        <option value="" disabled selected>--Select Brand--</option>
+        {% for br in brands %}
+          <option value="{{ br.id }}">{{ br.name }}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <!-- Basic Info -->
+    <div class="form-group">
+      <label for="name">Product Name:</label>
+      <input type="text" name="name" id="name" maxlength="150" required>
+    </div>
+
+    <div class="form-group">
+      <label for="slug">Slug:</label>
+      <input type="text" name="slug" id="slug" required>
+    </div>
+
+    <div class="form-group">
+      <label for="image">Product Image:</label>
+      <input type="file" name="image" id="image" accept="image/*">
+    </div>
+
+    <div class="form-group">
+      <label for="sku">SKU:</label>
+      <input type="text" name="sku" id="sku" maxlength="100" required>
+    </div>
+
+    <!-- Pricing -->
+    <div class="form-group">
+      <label for="mrp">MRP (&#8377;):</label>
+      <input type="number" name="mrp" id="mrp" step="0.01" required>
+    </div>
+
+    <div class="form-group">
+      <label for="selling_price">Selling Price (&#8377;):</label>
+      <input type="number" name="selling_price" id="selling_price" step="0.01" required>
+    </div>
+
+    <div class="form-group">
+      <label for="instock">
+        <input type="checkbox" name="instock" id="instock"> In Stock
+      </label>
+    </div>
+
+    <!-- Stock and Return -->
+    <div class="form-group">
+      <label for="total_stock">Total Stock:</label>
+      <input type="number" name="total_stock" id="total_stock" min="0" required>
+    </div>
+
+    <div class="form-group">
+      <label for="stock_threshold">Low Stock Threshold:</label>
+      <input type="number" name="stock_threshold" id="stock_threshold" min="0">
+    </div>
+
+    
+
+    
+
+    <!-- Wholesale -->
+    <div class="form-group">
+      <label for="is_wholesale">
+        <input type="checkbox" name="is_wholesale" id="is_wholesale"> Wholesale Available
+      </label>
+    </div>
+
+    <div class="form-group">
+      <label for="min_wholesale_quantity">Min Wholesale Quantity:</label>
+      <input type="number" name="min_wholesale_quantity" id="min_wholesale_quantity">
+    </div>
+
+    <div class="form-group">
+      <label for="wholesale_price">Wholesale Price (&#8377;):</label>
+      <input type="number" name="wholesale_price" id="wholesale_price" step="0.01">
+    </div>
+
+    <!-- Delivery -->
+    <div class="form-group">
+      <label for="is_free_delivery">
+        <input type="checkbox" name="is_free_delivery" id="is_free_delivery"> Free Delivery
+      </label>
+    </div>
+
+    <div class="form-group">
+      <label for="delivery_charge">Delivery Charge (&#8377;):</label>
+      <input type="number" name="delivery_charge" id="delivery_charge" step="0.01">
+    </div>
+
+    <div class="form-group">
+      <label for="return_available">
+        <input type="checkbox" name="return_available" id="return_available"> Return Available
+      </label>
+    </div>
+
+    <!-- Age Group -->
+    <div class="form-group">
+      <label for="ages">Age Group:</label>
+      <select name="ages" id="ages" required>
+        <option value="" disabled selected>--Select Age Group--</option>
+        {% for val, label in age_choices %}
+          <option value="{{ val }}">{{ label }}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <!-- New Arrival -->
+    <!-- <div class="form-group">
+      <label for="is_new_arrival">
+        <input type="checkbox" name="is_new_arrival" id="is_new_arrival"> Mark as New Arrival
+      </label>
+    </div> -->
+
+    <!-- Key Features -->
+    <div class="form-group">
+      <label for="key_features">Key Features (comma separated):</label>
+      <textarea name="key_features" id="key_features" rows="3" placeholder="light weight, Durability,Easy to Handle, "></textarea>
+    </div>
+
+    <!-- Description -->
+    <div class="form-group">
+      <label for="description">Product Description:</label>
+      <textarea name="description" id="description" rows="4"></textarea>
+    </div>
+
+    <button type="submit" id="submitBtn">Add Product</button>
+  </form>
+
+  <br>
+  <h2 class="heading-with-lines">Product List</h2>
+  <br>
+  <div class="search-container">
+    <label for="searchProductInput">Search Product Name</label>
+    <input type="text" id="searchProductInput" placeholder="Search by name">
+  </div>
+  <br>
+  <table id="productTable">
+    <thead>
+      <tr>
+        <th>Image</th><th>Name</th><th>Category</th><th>Brand</th>
+        <th>MRP</th><th>Price</th><th>Total_Stock</th><th>stock_threshold</th><th>Actions</th>
+      </tr>
+    </thead>
+    <tbody id="productTableBody">
+      <!-- Fetched data will appear here -->
+    </tbody>
+  </table>
+
+  <div id="paginationControls">
+    <button id="prevBtn">⏮ Previous</button>
+    <span id="pageInfo"></span>
+    <button id="nextBtn">⏭ Next</button>
+  </div>
+</div>
+{% endblock %}

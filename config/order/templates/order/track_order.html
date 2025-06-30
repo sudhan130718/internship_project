@@ -1,0 +1,58 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/track_order.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="track-order-page">
+  <h2 class="heading">Track Your Order</h2>
+
+  <div class="order-summary">
+    <p><strong>Order ID:</strong> {{ order.id }}</p>
+    <p><strong>Placed On:</strong> {{ order.created_at }}</p>
+    <p><strong>Status:</strong> {{ order.status }}</p>
+    <p><strong>Payment:</strong> {{ order.payment_method }}</p>
+    <p><strong>Total Amount:</strong> ₹{{ order.total_amount }}</p>
+  </div>
+
+  <div class="shipping-info">
+    <h3>Shipping Address</h3>
+    <p>{{ order.full_name }}</p>
+    <p>{{ order.address }}</p>
+    <p>{{ order.phone }}</p>
+  </div>
+<!-- Load Font Awesome (if not already loaded in base.html) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<div class="status-tracker">
+  <ul class="tracker">
+    <li class="{% if order.status in 'PENDING PROCESSING SHIPPED DELIVERED' %}done{% endif %}">
+      <i class="fas fa-hourglass-start"></i> Pending
+    </li>
+    <li class="{% if order.status in 'PROCESSING SHIPPED DELIVERED' %}done{% endif %}">
+      <i class="fas fa-cogs"></i> Processing
+    </li>
+    <li class="{% if order.status in 'SHIPPED DELIVERED' %}done{% endif %}">
+      <i class="fas fa-truck-moving"></i> Shipped
+    </li>
+    <li class="{% if order.status == 'DELIVERED' %}done{% endif %}">
+      <i class="fas fa-box-open"></i> Delivered
+    </li>
+  </ul>
+</div>
+
+
+  <div class="ordered-items">
+    <h3>Items in Order</h3>
+    <ul>
+      {% for item in order.items.all %}
+      <li>{{ item.product.name }} × {{ item.quantity }} - ₹{{ item.subtotal }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  <a href="#" class="btn">Need Help?</a>
+</div>
+{% endblock %}

@@ -1,0 +1,41 @@
+
+
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'css/wholesale_deals.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="wholesale-page">
+  <h2 class="heading"><span>Wholesale Deals</span></h2>
+
+  <div class="product-grid">
+    {% for product in products %}
+    <div class="product-card-new">
+            <a href="{% url 'toggle_wishlist' product.id %}" class="wishlist-icon">
+    {% if product.id in wishlist_product_ids %}
+      <img src="https://cdn-icons-png.flaticon.com/512/833/833472.png" alt="Remove from Wishlist" title="Remove from Wishlist">
+    {% else %}
+      <img src="https://cdn-icons-png.flaticon.com/512/1077/1077035.png" alt="Add to Wishlist" title="Add to Wishlist">
+    {% endif %}
+  </a>
+      <a href="{% url 'product_detail' product.id %}">
+        <img src="{{ product.image.url }}" alt="{{ product.name }}">
+        <p class="product-name">{{ product.name }}</p>
+      </a>
+      <p class="mrp">Price: <span class="strike">₹{{ product.selling_price }}</span></p>
+      <p class="price">Wholesale Price: ₹{{ product.wholesale_price }}</p>
+      <p>Min Order: {{ product.min_wholesale_quantity }}</p>
+      <form method="post" action="{% url 'add_to_cart' product.id %}?source=wholesale">
+        {% csrf_token %}
+        <button class="add-to-basket">Add to Basket</button>
+      </form>
+    </div>
+    {% empty %}
+    <p>No wholesale products found.</p>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

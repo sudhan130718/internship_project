@@ -1,0 +1,87 @@
+{% load static %}
+
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'core/css/footer.css' %}">
+
+{% endblock %}
+
+<div class="info-strip">
+  <div class="info-box">
+    <i class="fas fa-truck"></i>
+    <h4>Fast Delivery</h4>
+    <p>Quick & reliable</p>
+  </div>
+  <div class="info-box">
+    <i class="fas fa-credit-card"></i>
+    <h4>Secure Payment</h4>
+    <p>Trusted methods</p>
+  </div>
+  <div class="info-box">
+    <i class="fas fa-headset"></i>
+    <h4>24/7 Support</h4>
+    <p>We're here to help</p>
+  </div>
+  <div class="info-box">
+    <i class="fas fa-map-marker-alt"></i>
+    <h4>Store Locator</h4>
+    <p>Find near you</p>
+  </div>
+</div>
+
+
+ <h2 class="heading-with-lines"><span>Popular Brands</span></h2>
+
+  <div class="brand-grid">
+    {% for brand in brands %}
+        <div class="brand-logo">
+          {% if brand.logo %}
+            <img src="{{ brand.logo.url }}" alt="{{ brand.name }}">
+          {% else %}
+            <img src="{% static 'images/default-brand.png' %}" alt="No Logo">
+          {% endif %}
+        </div>
+    {% empty %}
+      <p>No brands found.</p>
+    {% endfor %}
+  </div>
+<footer class="site-footer">
+  <div class="footer-container">
+
+
+
+
+    <div class="footer-section">
+      <h3>About Us</h3>
+      <p>Wholesale Toy Supply for Rural Shops. We provide quality toys at affordable prices with reliable delivery.</p>
+    </div>
+    <div class="footer-section">
+      <h3>Quick Links</h3>
+      <ul>
+        <li><a href="{% url 'home' %}">Home</a></li>
+        <li><a href="{% url 'category_grid' %}">Categories</a></li>
+        <li><a href="{% url 'product_list' %}">Best Sellers</a></li>
+        <li><a href="#">Blog</a></li>
+      </ul>
+    </div>
+    <div class="footer-section">
+      <h3>Contact Us</h3>
+      <p>Email: support@toysale.com</p>
+      <p>Phone: +91 98765 43210</p>
+      <p>Location: Chengalpattu, Tamil Nadu</p>
+    </div>
+    <div class="footer-section">
+      <h3>Follow Us</h3>
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-whatsapp"></i></a>
+        <a href="#"><i class="fab fa-youtube"></i></a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 ToySale. All rights reserved.</p>
+  </div>
+</footer>
+

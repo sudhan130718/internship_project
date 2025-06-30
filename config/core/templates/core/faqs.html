@@ -1,0 +1,38 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'core/css/faqs.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="faq-section">
+  <h2 class="heading">Frequently Asked Questions (FAQs)</h2>
+
+  <div class="faq-item">
+    <h4 class="faq-question">1. Do you deliver to remote rural areas?</h4>
+    <p class="faq-answer">Yes! We specialize in supplying toys to rural shops. If your area is hard to reach, we will coordinate with local delivery partners to ensure your order reaches you safely.</p>
+  </div>
+
+  <div class="faq-item">
+    <h4 class="faq-question">2. How much is the delivery charge?</h4>
+    <p class="faq-answer">Delivery is free for orders above ₹5,000. Orders below that amount carry a flat ₹150 delivery charge.</p>
+  </div>
+
+  <div class="faq-item">
+    <h4 class="faq-question">3. How long will delivery take?</h4>
+    <p class="faq-answer">Orders are dispatched within 2-3 business days. Rural deliveries may take 5–7 business days depending on your location.</p>
+  </div>
+
+  <div class="faq-item">
+    <h4 class="faq-question">4. Can I track my order?</h4>
+    <p class="faq-answer">Yes, once your order is shipped, a tracking ID will be sent to your email or phone number. You can also track it from your account dashboard.</p>
+  </div>
+
+  <div class="faq-item">
+    <h4 class="faq-question">5. What if I receive damaged toys?</h4>
+    <p class="faq-answer">We ensure careful packaging, but if any product arrives damaged, contact us within 48 hours with a photo. We’ll arrange a replacement or refund based on the issue.</p>
+  </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'users/css/auth.css' %}">
+
+<div class="auth-container">
+  <h2>Forgot Username</h2>
+
+  {% if messages %}
+    {% for message in messages %}
+      <p style="color: green">
+        {{ message }}
+      </p>
+    {% endfor %}
+  {% endif %}
+
+  <form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Send Username</button>
+  </form>
+
+  <div class="auth-links">
+    <a href="{% url 'login' %}">← Back to Login</a>
+  </div>
+</div>
+{% endblock %}
